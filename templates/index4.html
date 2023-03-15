@@ -1,0 +1,38 @@
+{% extends "base1.html" %}
+{% include "header.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+             <div class="jumbotron p-3">
+                <h2>Manage <b>Employees</b> <button type="button" class="btn btn-success float-right" >Add new employess</button></h2>
+
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>EMP_ID</th>
+                        <th>FIRST_NAME</th>
+                        <th>LAST_NAME</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in details %}
+                       <tr>
+                        <td>{{row.0}}</td>
+                        <td>{{row.1}}</td>
+                        <td>{{row.2}}</td>
+                       </tr>
+                       {% endfor %}
+                    </tbody>
+                
+                       
+                    </table>
+                </div>
+           </div>
+        </div>
+                
+    </div>
+
+{% endblock %}

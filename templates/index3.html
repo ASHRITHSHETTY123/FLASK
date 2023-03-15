@@ -1,0 +1,108 @@
+
+{% extends "base3.html" %}
+{% include "header3.html" %}
+{% block title %}Home{% endblock %}
+{% block body %}
+
+<div class="container">
+    <div class="row">
+        <div class="col md-12">
+             <div class="jumbotron p-3">
+                <h2>Manage <b>Order</b> <button type="button" class="btn btn-success float-right" data-toggle="modal" data-target="#mymodel">Add new order</button></h2>
+
+                <table class="table">
+                    <thead>
+                      <tr>
+                        <th>Order_ID</th>
+                        <th>Customer_ID</th>
+                        <th>Employee_ID</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                        {% for row in orders %}
+                      <tr>
+                        <td>{{row.0}}</td>
+                        <td>{{row.1}}</td>
+                        <td>{{row.2}}</td>
+                       
+                        <td>
+                            <a href="/update3/{{row.0}}" class="btn btn-warning btn-xs" data-toggle="modal" data-target="#modaledit{{row.0}}">Edit</a>
+                            <a href="/delete3/{{row.0}}" class="btn btn-danger btn-xs" >Delete</a>
+                            <a href="/index4/{{row.0}}" class="btn btn-danger btn-xs" >order_details</a>
+                        </td>
+                      </tr>
+                      
+                     
+                    </tbody>
+                
+                        <div id="mymodel" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Add Order</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{url_for('insert3')}}" method="POST">
+                                            <div class="form-group">
+                                                <label>Order_ID</label>
+                                                <input type="int" class="form-control" name="OrderID" required="1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Customer_ID</label>
+                                                <input type="text" class="form-control" name="CustomerID" required="1">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Employee_ID</label>
+                                                <input type="int" class="form-control" name="EmployeeID" required="1">
+                                            </div>
+                                            <div class="form-group">
+                                                <button class="btn btn-primary" type="submit">Add order</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="modaledit{{row.0}}" class="modal fade" role="dialog">
+                            <div class="modal-dialog">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h4 class="modal-title">Edit Order</h4>
+                                    </div>
+                                    <div class="modal-body">
+                                        <form action="{{url_for('update3')}}" method="POST">
+                                            <div class="form-group">
+                                               
+                                                
+                                                
+                                                
+                                            </div>
+                                            <div class="form-group">
+                                                <label>CustomerID</label>
+                                                <input type="hidden" name="OrderID" class="form-control" value="{{row.0}}">
+                                                <input type="text" class="form-control" name="CustomerID" required="1" value="{{row.1}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <label>Employee_ID</label>
+                                                <input type="int" class="form-control" name="EmployeeID" required="1" value="{{row.2}}">
+                                            </div>
+                                            <div class="form-group">
+                                                <button class="btn btn-primary" type="submit">Update</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                    <div class="modal-footer">
+                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    </div>
+                                </div>
+                            </div>
+                            {% endfor %}
+                    </div>
+                   
+                    </table>
+                    
+
+{% endblock %}
